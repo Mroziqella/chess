@@ -5,81 +5,82 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.recursion.chess.figure.boundary.Cord;
-import pl.recursion.chess.figure.boundary.GameSize;
+import pl.recursion.chess.figure.boundary.Board;
 
 import java.util.stream.Stream;
 
+import static pl.recursion.chess.figure.boundary.Cord.create;
+
 class PawnTest {
 
-    private static final GameSize GAME_SIZE = new GameSize(8, 8);
+    private static final Board GAME_SIZE = new Board(8, 8);
 
     private static Stream<Arguments> method() {
         return Stream.of(
-                Arguments.of(new Pawn(Cord.create("C", 3, GAME_SIZE), new White()),
-                        AvailableMoves.Move.create(Cord.create("C", 4, GAME_SIZE)),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 4, GAME_SIZE))
-                                .add(Cord.create("D", 4, GAME_SIZE))),
+                Arguments.of(new Pawn(create("C", 3), new White()),
+                        AvailableMoves.Move.create(create("C", 4), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(create("B", 4))
+                                .add(create("D", 4)), GAME_SIZE),
 
                 Arguments.of(new Pawn(
                                 createCord("D6"), new White()),
-                        AvailableMoves.Move.create(createCord("D7")),
-                        AvailableMoves.Beating.create()
+                        AvailableMoves.Move.create(createCord("D7"), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
                                 .add(createCord("C7"))
-                                .add(createCord("E7"))),
+                                .add(createCord("E7")), GAME_SIZE),
 
-                Arguments.of(new Pawn(Cord.create("A", 3, GAME_SIZE), new White()),
-                        AvailableMoves.Move.create(Cord.create("A", 4, GAME_SIZE)),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 4, GAME_SIZE))),
+                Arguments.of(new Pawn(create("A", 3), new White()),
+                        AvailableMoves.Move.create(create("A", 4), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(create("B", 4)), GAME_SIZE),
 
                 Arguments.of(new Pawn(createCord("H3"), new White()),
-                        AvailableMoves.Move.create(createCord("H4")),
-                        AvailableMoves.Beating.create()
-                                .add(createCord("G4"))),
+                        AvailableMoves.Move.create(createCord("H4"), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(createCord("G4")), GAME_SIZE),
 
                 Arguments.of(new Pawn(createCord("H3"), new Black()),
-                        AvailableMoves.Move.create(createCord("H2")),
-                        AvailableMoves.Beating.create()
-                                .add(createCord("G2"))),
+                        AvailableMoves.Move.create(createCord("H2"), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(createCord("G2")), GAME_SIZE),
 
-                Arguments.of(new Pawn(Cord.create("C", 3, GAME_SIZE), new Black()),
-                        AvailableMoves.Move.create(Cord.create("C", 2, GAME_SIZE)),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 2, GAME_SIZE))
-                                .add(Cord.create("D", 2, GAME_SIZE))),
+                Arguments.of(new Pawn(create("C", 3), new Black()),
+                        AvailableMoves.Move.create(create("C", 2), GAME_SIZE),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(create("B", 2))
+                                .add(create("D", 2)), GAME_SIZE),
 
-                Arguments.of(new Pawn(Cord.create("C", 2, GAME_SIZE), new White()),
-                        AvailableMoves.Move.create(Cord.create("C", 3, GAME_SIZE))
-                                .add(Cord.create("C", 4, GAME_SIZE)),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 3, GAME_SIZE))
-                                .add(Cord.create("D", 3, GAME_SIZE))),
+                Arguments.of(new Pawn(create("C", 2), new White()),
+                        AvailableMoves.Move.create(create("C", 3), GAME_SIZE)
+                                .add(create("C", 4)),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(create("B", 3))
+                                .add(create("D", 3)), GAME_SIZE),
 
-                Arguments.of(new Pawn(Cord.create("C", 7, GAME_SIZE), new Black()),
-                        AvailableMoves.Move.create(Cord.create("C", 6, GAME_SIZE))
-                                .add(Cord.create("C", 5, GAME_SIZE)),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 6, GAME_SIZE))
-                                .add(Cord.create("D", 6, GAME_SIZE))),
+                Arguments.of(new Pawn(create("C", 7), new Black()),
+                        AvailableMoves.Move.create(create("C", 6), GAME_SIZE)
+                                .add(create("C", 5)),
+                        AvailableMoves.Beating.create(GAME_SIZE)
+                                .add(create("B", 6))
+                                .add(create("D", 6)), GAME_SIZE),
 
-                Arguments.of(new Pawn(Cord.create("C", 5, new GameSize(6, 6)), new Black()),
-                        AvailableMoves.Move.create(Cord.create("C", 4, new GameSize(6, 6)))
-                                .add(Cord.create("C", 3, new GameSize(6, 6))),
-                        AvailableMoves.Beating.create()
-                                .add(Cord.create("B", 4, new GameSize(6, 6)))
-                                .add(Cord.create("D", 4, new GameSize(6, 6))))
-        );
+                Arguments.of(new Pawn(create("C", 5), new Black()),
+                        AvailableMoves.Move.create(create("C", 4), new Board(6, 6))
+                                .add(create("C", 3)),
+                        AvailableMoves.Beating.create(new Board(6, 6))
+                                .add(create("B", 4))
+                                .add(create("D", 4)), new Board(6, 6)));
     }
 
     private static Cord createCord(String cords) {
-        return Cord.create(String.valueOf((char) cords.codePointAt(0)), cords.codePointAt(1) - 48, GAME_SIZE);
+        return create(String.valueOf((char) cords.codePointAt(0)), cords.codePointAt(1) - 48);
     }
 
     @ParameterizedTest(name = "Movement for {0}")
     @MethodSource("method")
-    void obtainAvailableMove(Pawn pawn, AvailableMoves.Move move, AvailableMoves.Beating beating) {
-        AvailableMoves availableMoves = pawn.obtainAvailableMove();
+    void obtainAvailableMove(Pawn pawn, AvailableMoves.Move move, AvailableMoves.Beating beating, Board board) {
+        AvailableMoves availableMoves = pawn.obtainAvailableMove(board);
         Assertions.assertThat(availableMoves.getMove()).isEqualTo(move);
         Assertions.assertThat(availableMoves.getBeating()).isEqualTo(beating);
     }

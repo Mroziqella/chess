@@ -1,6 +1,6 @@
 package pl.recursion.chess.figure.domain;
 
-import pl.recursion.chess.chessboard.Board;
+import pl.recursion.chess.figure.boundary.Board;
 import pl.recursion.chess.figure.boundary.Cord;
 
 class Pawn implements Figure {
@@ -17,13 +17,13 @@ class Pawn implements Figure {
         return null;
     }
 
-    public AvailableMoves obtainAvailableMove() {
-        AvailableMoves.Beating beating = AvailableMoves.Beating.create()
+    public AvailableMoves obtainAvailableMove(Board board) {
+        AvailableMoves.Beating beating = AvailableMoves.Beating.create(board)
                 .add(cord.moveHorizontal(player.yDirection()).moveVertical(1))
                 .add(cord.moveHorizontal(player.yDirection()).moveVertical(-1));
 
-        AvailableMoves.Move move = AvailableMoves.Move.create(cord.moveHorizontal(player.yDirection()));
-        if (cord.isPenultimateRowByY()) {
+        AvailableMoves.Move move = AvailableMoves.Move.create(cord.moveHorizontal(player.yDirection()),board);
+        if (cord.isPenultimateRowByY(board)) {
             move = move.add(cord.moveHorizontal(player.yDirection() * 2));
         }
         return new AvailableMoves(beating, move);
