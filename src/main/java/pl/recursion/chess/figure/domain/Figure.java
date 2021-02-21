@@ -1,9 +1,15 @@
 package pl.recursion.chess.figure.domain;
 
-import pl.recursion.chess.chessboard.Board;
+import io.vavr.control.Option;
+import pl.recursion.chess.figure.boundary.Board;
 import pl.recursion.chess.figure.boundary.Cord;
+
 
 public interface Figure {
 
-    Figure move(Cord cord, Board board);
+    Option<Figure> move(Cord cord, Board board);
+
+    Cord position();
+
+    boolean isPlayer(Player player);
 }

@@ -1,25 +1,25 @@
 package pl.recursion.chess.figure.boundary;
 
-public record Cord(X x, Y y, GameSize gameSize) {
+public record Cord(X x, Y y) {
 
     public Cord moveHorizontal(int horizontal) {
-        return new Cord(x, Y.create(y.value() + horizontal), gameSize);
+        return new Cord(x, Y.create(y.value() + horizontal));
     }
 
     public Cord moveVertical(int vertical) {
-        return new Cord(X.create(x.value() + vertical), y, gameSize);
+        return new Cord(X.create(x.value() + vertical), y);
     }
 
-    public static Cord create(String x, int y, GameSize gameSize) {
-        return new Cord(X.create(x), Y.create(y), gameSize);
+    public static Cord create(String x, int y) {
+        return new Cord(X.create(x), Y.create(y));
     }
 
-    public boolean valid() {
-        return x.value > 0 && x.value <= gameSize.width() && y.value > 0 && y.value <= gameSize.height();
+    public boolean valid(Board board) {
+        return x.value > 0 && x.value <= board.width() && y.value > 0 && y.value <= board.height();
     }
 
-    public boolean isPenultimateRowByY() {
-        return y.value == gameSize.height() - 1 || y.value == 2;
+    public boolean isPenultimateRowByY(Board board) {
+        return y.value == board.height() - 1 || y.value == 2;
     }
 
     public record Y(int value) {
