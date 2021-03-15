@@ -1,8 +1,6 @@
-package pl.recursion.chess.figure.domain;
+package pl.recursion.chess.game.boundary;
 
 import io.vavr.control.Option;
-import pl.recursion.chess.figure.boundary.Board;
-import pl.recursion.chess.figure.boundary.Cord;
 
 
 public interface Figure {

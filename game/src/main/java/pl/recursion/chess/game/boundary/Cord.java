@@ -1,4 +1,4 @@
-package pl.recursion.chess.figure.boundary;
+package pl.recursion.chess.game.boundary;
 
 public record Cord(X x, Y y) {
 
@@ -22,14 +22,14 @@ public record Cord(X x, Y y) {
         return y.value == board.height() - 1 || y.value == 2;
     }
 
-    public record Y(int value) {
+    record Y(int value) {
         public static Y create(int value) {
             return new Y(value);
         }
 
     }
 
-    public record X(String symbol, int value) {
+    record X(String symbol, int value) {
         public static X create(String symbol) {
             return new X(symbol, symbol.codePointAt(0) - 64);
         }

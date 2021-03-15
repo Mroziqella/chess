@@ -1,18 +1,28 @@
 package pl.recursion.chess.pawn.domain;
 
+
 import io.vavr.control.Option;
 import lombok.EqualsAndHashCode;
-import pl.recursion.chess.figure.boundary.Board;
-import pl.recursion.chess.figure.boundary.Cord;
-import pl.recursion.chess.figure.domain.Figure;
-import pl.recursion.chess.figure.domain.Player;
+import pl.recursion.chess.game.boundary.Board;
+import pl.recursion.chess.game.boundary.Cord;
+import pl.recursion.chess.game.boundary.Figure;
+import pl.recursion.chess.game.boundary.Player;
 
-@EqualsAndHashCode
+import java.util.UUID;
+
+
+@EqualsAndHashCode(of = {"uuid"})
 class Pawn implements Figure {
+    private final UUID uuid;
     private final Cord cord;
     private final Player player;
 
     public Pawn(Cord cord, Player player) {
+        this(UUID.randomUUID(), cord, player);
+    }
+
+    public Pawn(UUID uuid, Cord cord, Player player) {
+        this.uuid = uuid;
         this.cord = cord;
         this.player = player;
     }
@@ -21,7 +31,7 @@ class Pawn implements Figure {
     public Option<Figure> move(Cord cord, Board board) {
         AvailableMoves availableMoves = obtainAvailableMove(board);
         if (availableMoves.contains(cord)) {
-            return Option.of(new Pawn(cord, player));
+            return Option.of(new Pawn(uuid, cord, player));
         }
         return Option.none();
     }
@@ -50,8 +60,6 @@ class Pawn implements Figure {
 
     @Override
     public String toString() {
-        return "Pawn [" + player + "] " + cord.x().symbol() + cord.y().value();
-
-
+        return "Pawn [" + player + "] " + cord.x() + cord.y();
     }
 }

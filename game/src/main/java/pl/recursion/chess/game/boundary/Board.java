@@ -1,12 +1,8 @@
-package pl.recursion.chess.figure.boundary;
+package pl.recursion.chess.game.boundary;
 
 import io.vavr.collection.HashMap;
-import io.vavr.collection.List;
 import io.vavr.collection.Map;
-import io.vavr.control.Option;
 import lombok.EqualsAndHashCode;
-import pl.recursion.chess.figure.domain.Figure;
-import pl.recursion.chess.figure.domain.Player;
 
 
 import java.util.Objects;

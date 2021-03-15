@@ -1,6 +1,6 @@
-package pl.recursion.chess.figure.boundary;
+package pl.recursion.chess.game.domain;
 
-import pl.recursion.chess.figure.domain.Player;
+import pl.recursion.chess.game.boundary.Player;
 
 public class White implements Player {
     @Override

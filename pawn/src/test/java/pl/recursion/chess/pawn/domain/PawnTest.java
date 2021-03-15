@@ -5,16 +5,17 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pl.recursion.chess.figure.boundary.Black;
-import pl.recursion.chess.figure.boundary.Cord;
-import pl.recursion.chess.figure.boundary.Board;
-import pl.recursion.chess.figure.boundary.White;
-import pl.recursion.chess.figure.domain.Figure;
+import pl.recursion.chess.game.domain.Black;
+import pl.recursion.chess.game.boundary.Board;
+import pl.recursion.chess.game.boundary.Cord;
+import pl.recursion.chess.game.domain.White;
+import pl.recursion.chess.game.boundary.Figure;
 
 
 import java.util.stream.Stream;
 
-import static pl.recursion.chess.figure.boundary.Cord.create;
+import static pl.recursion.chess.game.boundary.Cord.*;
+
 
 class PawnTest {
 
@@ -64,6 +65,6 @@ class PawnTest {
     void obtainAvailableMove(Pawn pawn, Board board, Cord cord, Option<Figure> figure) {
         Option<Figure> move = pawn.move(cord, board);
 
-        Assertions.assertThat(figure).isEqualTo(move);
+        Assertions.assertThat(figure.map(Figure::position)).isEqualTo(move.map(Figure::position));
     }
 }

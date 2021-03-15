@@ -1,4 +1,4 @@
-package pl.recursion.chess.figure.domain;
+package pl.recursion.chess.game.boundary;
 
 public interface Player {
     int yDirection();

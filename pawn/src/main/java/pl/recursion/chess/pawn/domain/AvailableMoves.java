@@ -2,9 +2,10 @@ package pl.recursion.chess.pawn.domain;
 
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
-import pl.recursion.chess.figure.boundary.Board;
-import pl.recursion.chess.figure.boundary.Cord;
-import pl.recursion.chess.figure.domain.Player;
+import pl.recursion.chess.game.boundary.Board;
+import pl.recursion.chess.game.boundary.Cord;
+import pl.recursion.chess.game.boundary.Player;
+
 
 class AvailableMoves {
     private final Beating beating;
