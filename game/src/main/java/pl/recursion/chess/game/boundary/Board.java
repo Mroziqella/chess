@@ -6,18 +6,21 @@ import lombok.EqualsAndHashCode;
 
 
 import java.util.Objects;
+import java.util.UUID;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"uuid"})
 public class Board {
+    private final UUID uuid;
     private final int height;
     private final int width;
     private final Map<Cord, Figure> activeFigures;
 
     public Board(int height, int width) {
-        this(height, width, HashMap.empty());
+        this(UUID.randomUUID(), height, width, HashMap.empty());
     }
 
-    public Board(int height, int width, Map<Cord, Figure> activeFigures) {
+    public Board(UUID uuid, int height, int width, Map<Cord, Figure> activeFigures) {
+        this.uuid = uuid;
         this.height = height;
         this.width = width;
         this.activeFigures = activeFigures;
@@ -31,17 +34,11 @@ public class Board {
         return width;
     }
 
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(height, width);
-    }
-
     public boolean canBeat(Cord cord, Player player) {
-        return activeFigures.get(cord).map(figure-> !figure.isPlayer(player)).getOrElse(false);
+        return activeFigures.get(cord).map(figure -> !figure.isPlayer(player)).getOrElse(false);
     }
 
     public Board add(Figure figure) {
-        return new Board(height,width,activeFigures.put(figure.position(), figure));
+        return new Board(uuid, height, width, activeFigures.put(figure.position(), figure));
     }
 }

@@ -32,6 +32,7 @@
     <modules>
         <module>game</module>
         <module>pawn</module>
+        <module>ui</module>
     </modules>
 
     <properties>
